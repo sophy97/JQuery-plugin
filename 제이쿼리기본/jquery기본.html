@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery기본</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 id="title">안녕하세요</h1>
+    <ul id="list">
+        <li>첫번째</li>
+        <li>두번째</li>
+        <li>세번째</li>
+        <li>네번째</li>
+        <li>다섯번째</li>
+    </ul>
+    <input type="text" id="name">
+
+    <script>
+        // 
+        $(document).ready(
+            function(){
+                console.log('실행되었습니다~!');
+            }
+        );
+        $( ()=>{console.log('익명,화살표함수:제이쿼리로 실행중입니다!')} );
+
+        // document.querySelector().addEventLister("이벤트타입",함수); 를 제이쿼리로 간단히 표현하기
+        $("#title").on("click",function(){
+            console.log('타이틀을 눌렀습니다');
+        });
+        // css와 동일한 선택자를 통해 접근 가능함
+        console.dir( $("#list li:eq(1)") );
+
+        // 요소의 속성 값을 메소드를 통해 가져옴
+        const title = $("#title");
+        console.log(title.html());
+        title.html('원하는 값으로 수정함');
+
+        // setter뒤에 setter(값 수정 메소드)를 계속 연결해서 사용할 수 있다 =메소드체이닝
+        $("#name").val('값을 넣을 수 있음').attr('style','color:skyblue');
+        
+        // 요소 생성 & 추가 & 삭제
+        const pTag = $("<div>").append($("<p>").html("추가된 내용임"));
+        $("body").append(pTag);
+
+        $('#list li:eq(2)').remove();
+        $("body").append(pTag.clone());
+
+
+    </script>
+</body>
+</html>

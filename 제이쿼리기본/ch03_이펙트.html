@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #my-box {
+            display: none;
+            background-color:lightgreen; width: 150px; height: 100px; border: 5px solid green; 
+        }
+        .fixed-div {
+            display: none;
+            position: fixed; top: 10px; right: 10px;
+            background-color:lightgreen;
+            border: 5px solid green; 
+            width: 100px; height: 250px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <button id="title-btn">효과</button>
+    <h1 id="title">안녕하세요</h1>
+    <hr>
+    <button id="toggle-btn">토글 버튼</button>
+    <!-- 처음에 div가 안보이게 시작하려면! -->
+    <div style="display:none">
+        <p>이 요소는 div안의 p요소입니다 </p>
+        <p> toggle을 통해 효과를 주었습니다 </p>
+    </div>
+    <hr>
+    <button id="box-btn">버튼에 마우스오버하면 상자가 나타나고 사라짐</button> <br><br>
+    <div id="my-box"></div>
+    <hr>
+    <h2>고정된 div나타내기</h2>
+    <button id="slide-btn">클릭-슬라이드로 나타남</button>
+    <div class="fixed-div"></div>
+    
+
+
+    <script>
+
+        $('#title-btn').on("click",function(){
+            $('#title').toggle("fast");
+        });
+
+        $('#toggle-btn').on("click",function(){
+            $(this).next().toggle("slow");
+        });
+
+        $('#box-btn').on("mouseenter mouseleave", function(){
+            $('#my-box').fadeToggle("fast");
+        });
+
+        $('#slide-btn').on("click",function(){
+            $(this).next().slideToggle("slow");
+        });
+
+    </script>
+
+</body>
+</html>

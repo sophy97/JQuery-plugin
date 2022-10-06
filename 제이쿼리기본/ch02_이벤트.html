@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="radio-group">
+        <input type="radio" name="gender" value="woman">여성
+        <input type="radio" name="gender" value="man">남성
+    </div>
+    
+    <button id="btn">버튼</button>
+    <div>
+        <p id="text"></p>
+    </div>
+
+    <button id="btn2">버튼2</button>
+    <div>
+        <p id="text2"></p>
+    </div>
+
+    <button id="btn3">one메소드를 사용한 버튼</button>
+    <div>
+        <p id="text3"></p>
+    </div>
+
+    <!-- ul의 버튼을 클릭했을 때,
+        버튼의 backgroundColor값이 blue가 되도록 작성-->
+    <ul id="btn-list">
+        <li><button>1</button></li>
+        <li><button>2</button></li>
+        <li><button>3</button></li>
+    </ul>
+
+    <button id="add-a">링크가 추가됩니다</button>
+    <ul id="a-list">
+        <li><a>임의로 만든 링크</a></li>
+    </ul>
+
+    <input type="text" id="keyinput">
+    <div>
+        <p id="keytext"></p>
+    </div>
+
+    <h3>키보드를 누르면 화면에 보임, 단 영어만</h3>
+    <input type="text" id="keyinput2">
+    <div>
+        <p id="keyprac"></p>
+
+        <p id="select-event">선택한 부분을 변경할 수 있따</p>
+        
+    </div>
+    
+
+    <script>
+    //  querySelectorAll로 객체를 가져오면 배열로 들고오게 된다
+    //  배열의 forEach를 사용하거나 for문을 사용해서 이벤트리스너를 붙여준다.
+        document.querySelectorAll("#radio-group input").forEach(
+            function(element){
+                element.addEventListener("click",getValue);
+            }
+        );
+
+        // 제이쿼리
+        $("#radio-group input").on("click", getValue);
+        function getValue(){
+            // $(this): 현재 실행되고있는 요소
+            // 이벤트객체의 타겟과 동일하게 쓸 수 있다
+            console.log($(this).val());
+        }
+
+        // 하나의 요소에 여러개의 이벤트와 함수를 연결하기 
+        $('#btn').on( {
+            mouseenter : function(){
+                $('#text').append("마우스가 버튼 위에 있슴돠<br>");
+            },
+            click : function(){
+                $('#text').append("마우스를 클릭! 했슴돠<br>");
+            },
+            mouseleave : function(){
+                $('#text').append("마우스가 버튼을 빠져나갔슴돠<br>");
+            }
+        }
+        );
+
+        // 이벤트 이름을 띄어쓰기로 함께 넣어주면 여러개 함께 발생한다
+        $('#btn2').on("click mouseenter mouseleave", function(){
+                $('#text2').append("이벤트 발생!!<br>");
+            }
+        );
+
+        // 제이쿼리의 one 메소드 - 한 번만 실행되게
+        $('#btn3').one("click",function(){
+            $('#text3').append("첫번째 클릭임돠!<br>");
+        
+            // one메소드 이벤트가 한번 실행된 후 실행되게 하기 위함 > 안에 넣음
+            $('#btn3').on("click",function(){
+            $('#text3').append("이미 클릭했거든요?!<br>");
+            })
+        });
+
+        // ul태그 내 모든 버튼에 적용되도록
+        $('#btn-list li button').on("click",function(){
+            $(this).attr("style","background-color:skyblue");
+            // attr 을 이용해 속성값 가져올 때, 속성이름을 써줘야 한다
+            console.log( ($(this).attr("style")) );
+        });
+
+
+        // 이벤트 위임 : 부모요소에서 자식요소에게 이벤트를 연결
+        // 내부에 요소가 추가되어도 그 추가된 요소에 이벤트를 넘겨줄 수 있다
+        $('#a-list li a').on('click', "a", function(){
+            console.log("이벤트 실행했삼");
+        });
+
+        $('#add-a').on('click', function(){
+            $('#a-list').append('<li><a>추가된 링크</a></li>');
+        });
+    
+        // 키보드 이벤트
+        $('#keyinput').on('keypress', function(e){
+            $("#keytext").html(e.key);
+        });
+
+        // 키보드이벤트 실습
+        $('#keyinput2').on('keydown', function(e){
+            $("#keyprac").html(e.key);
+        });
+
+        // 실습 답안 코드
+        // 키보드이벤트 - 키보드메소드로 연결
+        // $('body').keydown(function(e) {
+        //     $("#keytext").html(e.key);
+        // });
+
+        // 입력창에서 선택
+        $('#select-event').select(function(){
+            console.log("선택햇슴");
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 팝업 css파일 -->
+    <link rel="stylesheet" href="./magnific/magnific-popup.css">
+    <link rel="stylesheet" href="./magnific/magnific.css">
+
+    <!-- 버전 부합하는 제이쿼리와 팝업 js파일들 연결 -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/magnific/jquery.magnific-popup.js"></script>
+    <script src="/magnific/jquery.magnific-popup.min.js"></script>
+
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <a class="image-popup-vertical-fit" href="./img/back.jpg" title="NightSky VIEW">
+        <!-- 아래는 화면에 미리보기 보이는 작은 이미지 -->
+        <img src="./img/back.jpg" width="75" height="75">
+    </a>
+    <a class="image-popup-fit-width" href="./img/path.jpg" title="This image fits only horizontally.">
+        <img src="./img/path.jpg" width="75" height="75">
+    </a>
+    <a class="image-popup-no-margins" href="./img/back00.jpg">
+        <img src="./img/back00.jpg" width="107" height="75">
+    </a>
+
+
+    <script>
+        $(document).ready(function() {
+
+$('.image-popup-vertical-fit').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+        verticalFit: true
+    },
+    zoom: {
+        enabled: true,
+        duration: 300 // don't foget to change the duration also in CSS
+    }
+    
+});
+
+$('.image-popup-fit-width').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    image: {
+        verticalFit: true
+    }
+});
+
+$('.image-popup-no-margins').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    fixedContentPos: true,
+    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+    image: {
+        verticalFit: true
+    },
+    zoom: {
+        enabled: true,
+        duration: 300 // don't foget to change the duration also in CSS
+    }
+});
+
+});
+    </script>
+</body>
+</html>
